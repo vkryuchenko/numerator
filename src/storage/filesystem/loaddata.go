@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func (fs *FSStorage) LoadData() error {
+func (fs *FSStorage) loadData() error {
 	f, err := os.Open(fs.DumpPath)
 	if err != nil {
 		return err

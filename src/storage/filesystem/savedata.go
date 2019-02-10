@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// SaveData store data into local file system
 func (fs *FSStorage) SaveData() error {
 	f, err := os.OpenFile(fs.DumpPath, os.O_CREATE|os.O_WRONLY, 0775)
 	if err != nil {

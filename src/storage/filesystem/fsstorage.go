@@ -2,24 +2,27 @@ package filesystem
 
 import "sync"
 
+// FSStorage local file system implementation of Storage interface
 type FSStorage struct {
 	DumpPath string
 	sync.Mutex
 	data map[string]uint
 }
 
+// New implement Storage.New()
 func New(dumpPath string) (*FSStorage, error) {
 	fs := FSStorage{
 		DumpPath: dumpPath,
 		data:     make(map[string]uint),
 	}
-	err := fs.LoadData()
+	err := fs.loadData()
 	if err != nil {
 		return &fs, err
 	}
 	return &fs, nil
 }
 
+// Get implement Storage.Get()
 func (fs FSStorage) Get(key string) (uint, error) {
 	fs.Lock()
 	defer fs.Unlock()
@@ -33,6 +36,7 @@ func (fs FSStorage) Get(key string) (uint, error) {
 	return result, nil
 }
 
+// Set implement Storage.Set()
 func (fs FSStorage) Set(key string, value uint) error {
 	fs.Lock()
 	defer fs.Unlock()
@@ -40,6 +44,7 @@ func (fs FSStorage) Set(key string, value uint) error {
 	return nil
 }
 
+// Delete implement Storage.Delete()
 func (fs FSStorage) Delete(key string) error {
 	fs.Lock()
 	defer fs.Unlock()
@@ -47,6 +52,7 @@ func (fs FSStorage) Delete(key string) error {
 	return nil
 }
 
+// ShowData implement Storage.ShowData()
 func (fs FSStorage) ShowData() interface{} {
 	fs.Lock()
 	defer fs.Unlock()

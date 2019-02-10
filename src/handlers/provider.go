@@ -6,6 +6,7 @@ import (
 	"storage"
 )
 
+// Provider represent single instances of Storage, MasterToken and Echo
 type Provider struct {
 	Storage     storage.Storage
 	MasterToken string
@@ -25,6 +26,7 @@ func (p *Provider) init() {
 	p.instance = e
 }
 
+// Serve prepare and start Echo
 func (p *Provider) Serve() error {
 	p.init()
 	return p.instance.Start(":8888")

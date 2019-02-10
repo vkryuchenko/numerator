@@ -1,5 +1,6 @@
 package storage
 
+// Storage represent data workaround interface
 type Storage interface {
 	ShowData() interface{}
 	Get(key string) (uint, error)
